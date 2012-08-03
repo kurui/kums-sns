@@ -4,12 +4,12 @@
 	<groupId>com.kurui</groupId>
 	<artifactId>kums-sns</artifactId>
 	<packaging>pom</packaging>
-	<name>KUMS-SNS Root Project</name>
+	<name>KUMS SNS Root Project</name>
 	<version>2.1.0</version>
 	<!-- <parent> <artifactId>root</artifactId> <groupId>com.kurui</groupId> 
 		<version>2.1.0</version> </parent> -->
 	<properties>
-		<source.version>1.5</source.version>
+		<source.version>1.6</source.version>
 		<encoding>UTF-8</encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 

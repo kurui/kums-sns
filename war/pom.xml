@@ -58,7 +58,7 @@
 	</organization>
 
 	<build>
-		<finalName>kums-war</finalName>
+		<finalName>kums-sns-war</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<!-- <resource> <directory>src/main/resources</directory> <filtering>true</filtering> 
