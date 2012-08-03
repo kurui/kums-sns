@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-core/3.5.0/lucene-core-3.5.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-cypher/1.8-SNAPSHOT/neo4j-cypher-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-graph-algo/1.8-SNAPSHOT/neo4j-graph-algo-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-graph-matching/1.8-SNAPSHOT/neo4j-graph-matching-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-jmx/1.8-SNAPSHOT/neo4j-jmx-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-kernel/1.8-SNAPSHOT/neo4j-kernel-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-lucene-index/1.8-SNAPSHOT/neo4j-lucene-index-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-udc/1.8-SNAPSHOT/neo4j-udc-1.8-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/testng/testng/5.8/testng-5.8-jdk15.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_03"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="target"/>
 </classpath>
