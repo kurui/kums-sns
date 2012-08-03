@@ -1,0 +1,10 @@
+<classpath>
+  <classpathentry kind="output" path="war/WEB-INF/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/jsp/jstl/1.0/jstl-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/directwebremoting/dwr/2.0.1/dwr-2.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/kurui/kums-sns-core/2.1.0/kums-sns-core-2.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/taglibs/standard/1.0/standard-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/taglibs/struts-el/1.0/struts-el-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/struts/struts-legacy/1.0/struts-legacy-1.0.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>
