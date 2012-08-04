@@ -1,6 +1,7 @@
 package org.neo4j.examples.apoc;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -9,8 +10,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 /**
- * 内嵌示例
- * 创建于JVM工作目录
+ * 内嵌示例 创建于JVM工作目录
  * 
  * */
 
@@ -33,18 +33,29 @@ public class EmbeddedNeo4j {
 			Node secondNode = graphDb.createNode();
 			firstNode.setProperty(NAME_KEY, "Hello");
 			secondNode.setProperty(NAME_KEY, "World");
+
 			// 在两个节点间创建一个关系，也就是连接两个节点
 			firstNode.createRelationshipTo(secondNode,
 					ExampleRelationshipTypes.EXAMPLE);
 			String greeting = firstNode.getProperty(NAME_KEY) + " "
 					+ secondNode.getProperty(NAME_KEY);
 			System.out.println(greeting);
+
 			Relationship relationship = firstNode.getSingleRelationship(
 					ExampleRelationshipTypes.EXAMPLE, Direction.OUTGOING);
+			relationship.setProperty("type", "friend");
+			
+			Relationship relationship2 = firstNode.createRelationshipTo(
+					secondNode, DynamicRelationshipType.withName("KNOWS"));
+
+
+
 			System.out.println(relationship.getId());
 			System.out.println(relationship.getEndNode().getProperty(NAME_KEY));
 			System.out.println(relationship.getStartNode()
 					.getProperty(NAME_KEY));
+			System.out.println(relationship.getProperty("type"));
+
 			relationship.delete();
 			firstNode.delete();
 			secondNode.delete();

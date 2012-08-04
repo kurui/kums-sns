@@ -1,4 +1,4 @@
-package com.kurui.kums.neo4j.test;
+package com.kurui.kums.sns.neo4j.test;
 
 import junit.framework.TestCase;
 

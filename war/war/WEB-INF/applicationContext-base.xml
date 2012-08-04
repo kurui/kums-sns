@@ -43,18 +43,19 @@
 		</property>
 	</bean>
 
+<!--  
 	<bean id="taskJobScheduler"
 		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail">
 			<ref bean="taskJob" />
 		</property>
-		<!-- 延时1s 执行任务 --> 
 		<property name="startDelay">
 			<value>1000</value>
+			<description>延时1s 执行任务</description>
 		</property>
-		<!-- 任务执行周期 10s --> 
 		<property name="repeatInterval">
 			<value>100000</value>
+			<description>任务执行周期 10s </description>
 		</property>
 	</bean>
 
@@ -70,4 +71,21 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="taskJob"
+		class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		
+			<value>com.kurui.kums.system.StatementTaskJob</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="statementBiz">
+					<ref bean="statementBiz" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	-->
 </beans>
