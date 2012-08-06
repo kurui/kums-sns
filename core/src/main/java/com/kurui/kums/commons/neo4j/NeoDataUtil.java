@@ -1,7 +1,6 @@
 package com.kurui.kums.commons.neo4j;
 
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class NeoDataUtil {

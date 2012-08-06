@@ -6,13 +6,13 @@
 		<bean id="neoDataSource" class="com.kurui.kums.commons.neo4j.NeoDataUtil" >
 		<!-- neo4j   -->
 		<property name="storeDir">
-			<value>${storeDir}</value>
+			<value>${neoStoreDir}</value>
 		</property>
 		<property name="username">
-			<value>${username}</value>
+			<value>${neoUsername}</value>
 		</property>
 		<property name="password">
-			<value>${password}</value>
+			<value>${neoPassword}</value>
 		</property>
 	</bean>
 	

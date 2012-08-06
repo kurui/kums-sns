@@ -145,12 +145,10 @@
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<!-- <property name="location" value="classpath:kums.properties" /> -->
-		<!-- 使用locations属性定义多个配置文件 -->
 		<property name="locations">
 			<list>
-				<property name="location" value="classpath:kums.properties" />
-				<property name="location" value="classpath:kums-sns.properties" />
+				<value>classpath:kums.properties</value>
+				<value>classpath:kums-sns.properties</value>
 			</list>
 		</property>
 
