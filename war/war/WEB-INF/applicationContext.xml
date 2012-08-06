@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
-<beans default-lazy-init="false" default-autowire="no" default-dependency-check="none">
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="default" autowire="default"
+<beans default-lazy-init="false" default-autowire="no"
+	default-dependency-check="none">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" lazy-init="default" autowire="default"
 		dependency-check="default">
-		<!--  oracle 10g  -->
+		<!-- oracle 10g -->
 		<property name="driverClassName">
 			<value>${driverClassName}</value>
 		</property>
@@ -43,21 +45,17 @@
 		</property>
 	</bean>
 
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" lazy-init="default" autowire="default"
-		dependency-check="default">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+		lazy-init="default" autowire="default" dependency-check="default">
 		<property name="dataSource">
 			<ref local="dataSource" />
 		</property>
 		<property name="lobHandler" ref="lobHandler" />
 
 		<!-- JBoss识别不了，怪哉 -->
-		<!-- 
-			<property name="mappingLocations">
-			<list>
-			<value>classpath*:_config/hbm/com/kurui/kums/**/*.hbm.xml</value>
-			</list>
-			</property>
-		-->
+		<!-- <property name="mappingLocations"> <list> <value>classpath*:_config/hbm/com/kurui/kums/**/*.hbm.xml</value> 
+			</list> </property> -->
 
 		<property name="mappingResources">
 			<list>
@@ -126,14 +124,15 @@
 		</property>
 	</bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" lazy-init="default" autowire="default"
-		dependency-check="default">
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		lazy-init="default" autowire="default" dependency-check="default">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" lazy-init="default" autowire="default"
-		dependency-check="default">
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate"
+		lazy-init="default" autowire="default" dependency-check="default">
 		<property name="sessionFactory" ref="sessionFactory" />
 		<property name="fetchSize" value="20" />
 		<property name="cacheQueries">
@@ -141,23 +140,25 @@
 		</property>
 	</bean>
 
-	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+		lazy-init="true" />
 
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:kums.properties" />
-		<!--
-			使用locations属性定义多个配置文件
-			<property name="locations">
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- <property name="location" value="classpath:kums.properties" /> -->
+		<!-- 使用locations属性定义多个配置文件 -->
+		<property name="locations">
 			<list>
-			<value>classpath:config/maxid.properties</value>
-			<value>classpath:config/jdoserver.properties</value>
+				<property name="location" value="classpath:kums.properties" />
+				<property name="location" value="classpath:kums-sns.properties" />
 			</list>
-			</property>
-		-->
+		</property>
+
 
 	</bean>
 
-	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="transactionAttributes">
 			<props>
@@ -167,7 +168,8 @@
 		</property>
 	</bean>
 
-	<bean id="bizAOP" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+	<bean id="bizAOP"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 		<property name="beanNames">
 			<list>
 				<value>*Biz</value>
@@ -185,5 +187,5 @@
 	<import resource="applicationContext-system.xml" />
 	<import resource="applicationContext-transaction.xml" />
 	<import resource="applicationContext-finance.xml" />
-		<import resource="applicationContext-market.xml" />
+	<import resource="applicationContext-market.xml" />
 </beans>
