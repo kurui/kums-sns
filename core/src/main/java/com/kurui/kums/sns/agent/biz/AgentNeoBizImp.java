@@ -1,10 +1,10 @@
-package com.kurui.kums.sns.biz;
+package com.kurui.kums.sns.agent.biz;
 
 import java.util.List;
 
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.base.exception.AppException;
-import com.kurui.kums.sns.AgentNode;
+import com.kurui.kums.sns.agent.AgentNode;
 
 public class AgentNeoBizImp implements AgentNeoBiz {
 
@@ -38,6 +38,12 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 	public void queryAgentNodeList(AgentNode agentNode) throws AppException {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void buildAgentNetwork() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

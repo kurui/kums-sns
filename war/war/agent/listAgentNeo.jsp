@@ -88,7 +88,7 @@
 	<body>
 		<div id="mainContainer">
 			<div id="container">
-				<html:form action="/agent/agentList.do">
+				<html:form action="/agent/agentNeoList.do">
 					<html:hidden property="thisAction" />
 					<html:hidden property="lastAction" />
 					<html:hidden property="intPage" />

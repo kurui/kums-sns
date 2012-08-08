@@ -1,17 +1,19 @@
-package com.kurui.kums.sns.dao;
+package com.kurui.kums.sns.agent.biz;
 
 import java.util.List;
 
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.base.exception.AppException;
-import com.kurui.kums.sns.AgentNode;
+import com.kurui.kums.sns.agent.AgentNode;
 
 /**
  * @author yanrui
  * 
  * @description 客户关系图  neo4j 接口
  */
-public interface AgentNeoDao {
+public interface AgentNeoBiz {
+	public void buildAgentNetwork();
+	
 	public void addAgentNode(Agent agent) throws AppException;
 	
 	public void addAgentNodeList(List<Agent> agentList) throws AppException;

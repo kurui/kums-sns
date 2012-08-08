@@ -1,4 +1,4 @@
-package com.kurui.kums.sns;
+package com.kurui.kums.sns.agent;
 
 import com.kurui.kums.agent.Agent;
 

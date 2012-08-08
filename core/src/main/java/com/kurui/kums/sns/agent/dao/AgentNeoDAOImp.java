@@ -1,12 +1,12 @@
-package com.kurui.kums.sns.dao;
+package com.kurui.kums.sns.agent.dao;
 
 import java.util.List;
 
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.base.exception.AppException;
-import com.kurui.kums.sns.AgentNode;
+import com.kurui.kums.sns.agent.AgentNode;
 
-public class AgentNeoDaoImp implements AgentNeoDao {
+public class AgentNeoDAOImp implements AgentNeoDAO {
 
 	@Override
 	public void addAgentNode(Agent agent) throws AppException {

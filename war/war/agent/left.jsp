@@ -28,6 +28,13 @@
 							<a href="<%=path%>/agent/agentList.do?thisAction=list" target="mainFrame">全部客户</a>
 						</li>
 						<li>
+							<a href="<%=path%>/agent/agentNeoList.do?thisAction=list" target="mainFrame">客户网络分析</a>
+						</li>
+						<li>
+							<a href="<%=path%>/agent/agentNeoList.do?thisAction=createNeo" target="mainFrame">[Test]初始化网络</a>
+						</li>
+						<!-- 
+						<li>
 							<a href="<%=path%>/agent/agentList.do?thisAction=list&companyId=534" target="mainFrame">终端客户列表</a>
 						</li>
 						<li>
@@ -48,7 +55,9 @@
 						<li>
 							<a href="#" target="mainFrame">客户分析</a>
 						</li>
+						 -->
 					</ul>
+					<!-- 
 					<span class="title" onClick="showUL('ulDirectAgent')"><a href="<%=path%>/agent/agentList.do?thisAction=listDirectAgent&directLevelIds=1,2,3,4,5" target="mainFrame">直销商管理</a> </span>
 					<ul id="ulDirectAgent" class="contents" style="display: none">
 						<li>
@@ -85,7 +94,7 @@
 							<a href="<%=path%>/agent/agentHabitList.do?thisAction=list" target="mainFrame">客户习性列表</a>
 						</li>
 					</ul>
-
+-->
 				</div>
 			</div>
 			<div class="closeSiseBar">

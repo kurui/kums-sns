@@ -6,7 +6,11 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
+import org.neo4j.graphdb.ReturnableEvaluator;
+import org.neo4j.graphdb.StopEvaluator;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.Traverser.Order;
+import org.neo4j.graphdb.traversal.Traverser;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 /**
@@ -29,26 +33,36 @@ public class EmbeddedNeo4j {
 		Transaction tx = graphDb.beginTx();
 		try {
 			// 下面创建两个节点
-			Node firstNode = graphDb.createNode();
-			Node secondNode = graphDb.createNode();
-			firstNode.setProperty(NAME_KEY, "Hello");
-			secondNode.setProperty(NAME_KEY, "World");
+			Node node1 = graphDb.createNode();
+			Node node2 = graphDb.createNode();
+			Node node3 = graphDb.createNode();
+
+			node1.setProperty(NAME_KEY, "Hello");
+			node2.setProperty(NAME_KEY, "World");
+			node3.setProperty(NAME_KEY, "Three People");
 
 			// 在两个节点间创建一个关系，也就是连接两个节点
-			firstNode.createRelationshipTo(secondNode,
-					ExampleRelationshipTypes.EXAMPLE);
-			String greeting = firstNode.getProperty(NAME_KEY) + " "
-					+ secondNode.getProperty(NAME_KEY);
+			node1.createRelationshipTo(node2, ExampleRelationshipTypes.EXAMPLE);
+			node2.createRelationshipTo(node3, ExampleRelationshipTypes.EXAMPLE);
+
+			org.neo4j.graphdb.Traverser friends = node1.traverse(Order.BREADTH_FIRST,
+					StopEvaluator.DEPTH_ONE/*查询深度*/,
+					ReturnableEvaluator.ALL_BUT_START_NODE, ExampleRelationshipTypes.EXAMPLE,
+					Direction.BOTH);
+			for (Node friend : friends) {
+				System.out.println("==============find friend:"+friend.getProperty("name"));
+			}
+
+			String greeting = node1.getProperty(NAME_KEY) + " "
+					+ node2.getProperty(NAME_KEY);
 			System.out.println(greeting);
 
-			Relationship relationship = firstNode.getSingleRelationship(
+			Relationship relationship = node1.getSingleRelationship(
 					ExampleRelationshipTypes.EXAMPLE, Direction.OUTGOING);
 			relationship.setProperty("type", "friend");
-			
-			Relationship relationship2 = firstNode.createRelationshipTo(
-					secondNode, DynamicRelationshipType.withName("KNOWS"));
 
-
+			Relationship relationship2 = node1.createRelationshipTo(node2,
+					DynamicRelationshipType.withName("KNOWS"));
 
 			System.out.println(relationship.getId());
 			System.out.println(relationship.getEndNode().getProperty(NAME_KEY));
@@ -57,8 +71,9 @@ public class EmbeddedNeo4j {
 			System.out.println(relationship.getProperty("type"));
 
 			relationship.delete();
-			firstNode.delete();
-			secondNode.delete();
+			
+			node1.delete();
+			node2.delete();
 			tx.success();
 		} finally {
 			tx.finish();
