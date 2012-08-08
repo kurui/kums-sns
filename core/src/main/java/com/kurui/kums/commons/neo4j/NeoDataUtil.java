@@ -4,12 +4,17 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class NeoDataUtil {
-	protected String storeDir;
+	protected String storeDir="F:\\project\\Neo4j-DB\\kums-sns";
 	protected String username;
 	protected String password;
 	protected GraphDatabaseService neoService;
 
 	public NeoDataUtil() {
+	}
+	
+	public static void main(String[] args) {
+		NeoDataUtil neoUtil=new NeoDataUtil();
+		GraphDatabaseService neoService=neoUtil.getConnection();
 	}
 
 	public GraphDatabaseService getConnection() {
@@ -18,6 +23,8 @@ public class NeoDataUtil {
 		}
 		if (storeDir != null) {
 			getConnection(storeDir);
+		}else{
+			System.err.println("neo4j storeDir is null==========");
 		}
 		return null;
 

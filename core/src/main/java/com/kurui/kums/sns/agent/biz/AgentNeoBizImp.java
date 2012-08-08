@@ -3,14 +3,40 @@ package com.kurui.kums.sns.agent.biz;
 import java.util.List;
 
 import com.kurui.kums.agent.Agent;
+import com.kurui.kums.agent.dao.AgentDAO;
 import com.kurui.kums.base.exception.AppException;
 import com.kurui.kums.sns.agent.AgentNode;
+import com.kurui.kums.sns.agent.dao.AgentNeoDAO;
 
 public class AgentNeoBizImp implements AgentNeoBiz {
+	private AgentDAO agentDAO;
+	private AgentNeoDAO agentNeoDAO;
+
+
+	
+	@Override
+	public void buildAgentNetwork() {
+		
+		System.out.println("=============create Agent Neo =================");
+		try {
+			List<Agent> agentList=agentDAO.getAgentList();
+			
+			for (int i = 0; i <agentList.size(); i++) {
+				if(i<10){
+					Agent agent=agentList.get(i);
+					addAgentNode(agent);
+				}
+				
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+		System.out.println("=============finish create Agent Neo =================");
+	}
 
 	@Override
 	public void addAgentNode(Agent agent) throws AppException {
-		// TODO Auto-generated method stub
+		agentNeoDAO.addAgentNode(agent);
 
 	}
 
@@ -40,10 +66,15 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 
 	}
 
-	@Override
-	public void buildAgentNetwork() {
-		// TODO Auto-generated method stub
-		
+	public void setAgentDAO(AgentDAO agentDAO) {
+		this.agentDAO = agentDAO;
 	}
+
+	public void setAgentNeoDAO(AgentNeoDAO agentNeoDAO) {
+		this.agentNeoDAO = agentNeoDAO;
+	}
+
+	
+
 
 }

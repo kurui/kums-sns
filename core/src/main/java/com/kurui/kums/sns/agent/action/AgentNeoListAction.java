@@ -16,36 +16,39 @@ import com.kurui.kums.agent.biz.AgentBiz;
 import com.kurui.kums.base.BaseAction;
 import com.kurui.kums.base.Constant;
 import com.kurui.kums.base.exception.AppException;
+import com.kurui.kums.sns.agent.AgentNeoListForm;
 import com.kurui.kums.sns.agent.biz.AgentNeoBiz;
 import com.kurui.kums.transaction.util.PlatComAccountStore;
 
 public class AgentNeoListAction extends BaseAction {
 	private AgentBiz agentBiz;
-	private AgentNeoBiz agnetNeoBiz;
+	private AgentNeoBiz agentNeoBiz;
 	
 	public ActionForward createNeo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws AppException {
-		AgentListForm agentListForm = (AgentListForm) form;
+		AgentNeoListForm agentNeoListForm = (AgentNeoListForm) form;
 		request.setAttribute("companyList", PlatComAccountStore
 				.getGroupCompnayList());
-		if (agentListForm == null) {
-			agentListForm = new AgentListForm();
-		}
+		
+			AgentListForm agentListForm = new AgentListForm();
+		
 		try {
-			List<Agent> formAgentList = agentBiz.list(agentListForm);
-			agentListForm.setList(formAgentList);
-			request = setAgentIdList(formAgentList, request);
+//			List<Agent> formAgentList = agentBiz.list(agentListForm);
+//			agentListForm.setList(formAgentList);
+//			request = setAgentIdList(formAgentList, request);
 			
-			System.out.println("=============create Agent Neo =================");
+		
 			
-			agnetNeoBiz.buildAgentNetwork();
+			agentNeoBiz.buildAgentNetwork();
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("agentListForm", agentListForm);
-		return mapping.findForward("listAgent");
+//		return mapping.findForward("listAgent");
+		return null;
 	}
 
 	public ActionForward list(ActionMapping mapping, ActionForm form,
@@ -153,8 +156,8 @@ public class AgentNeoListAction extends BaseAction {
 		this.agentBiz = agentBiz;
 	}
 
-	public synchronized void setAgnetNeoBiz(AgentNeoBiz agnetNeoBiz) {
-		this.agnetNeoBiz = agnetNeoBiz;
+	public  void setAgentNeoBiz(AgentNeoBiz agentNeoBiz) {
+		this.agentNeoBiz = agentNeoBiz;
 	}
 
 
