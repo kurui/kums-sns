@@ -7,6 +7,8 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.index.Index;
+import org.neo4j.graphdb.index.IndexManager;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 import com.kurui.kums.agent.Agent;
@@ -28,10 +30,8 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 			if (neoService != null) {
 				Transaction tx = neoService.beginTx();
 				try {
-					
-					Node root=neoService.getNodeById(1);
-					
-					
+
+					Node root = neoService.getNodeById(0);
 
 					Node newNode = neoService.createNode();
 					newNode.setProperty("agentId", agent.getId());
@@ -40,19 +40,40 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 					newNode.setProperty("sex", agent.getSex());
 					newNode.setProperty("reside",
 							StringUtil.rTrim(agent.getReside()));
-					newNode.setProperty("know_place",
-							StringUtil.rTrim(agent.getKnowPlace()));
-					
+					String know_place=null;
+					if(StringUtil.isEmpty(agent.getKnowPlace())==false){
+						know_place=StringUtil.rTrim(agent.getKnowPlace());
+						newNode.setProperty("know_place",know_place);
+					}
+				
+
 					root.createRelationshipTo(newNode,
 							DynamicRelationshipType.withName("Root"));
+
+					// 索引 查询
+					IndexManager indexManager=neoService.index();
+					Index<Node> nodeIndex=indexManager.forNodes("agent");
+					nodeIndex.add(newNode, "agentId", agent.getId());
 					
 					
-					Node knowPlace=neoService.createNode();
-					knowPlace.setProperty("name",StringUtil.rTrim(agent.getKnowPlace()));
+					if(know_place!=null){
+						Index<Node> knowPlaceIndex=indexManager.forNodes("know_place_index");
+						Node knowPlaceNode=knowPlaceIndex.get("name", know_place).getSingle();
+						
+						if(knowPlaceNode==null){
+							knowPlaceNode = neoService.createNode();
+							knowPlaceNode.setProperty("name",
+									StringUtil.rTrim(agent.getKnowPlace()));
+							knowPlaceIndex.add(knowPlaceNode, "name",know_place);
+						}
+						
+
+						Relationship rsKnowPlace = newNode.createRelationshipTo(
+								knowPlaceNode,
+								DynamicRelationshipType.withName("KNOW_PLACE"));
+					}
 					
-					Relationship rsKnowPlace = newNode.createRelationshipTo(knowPlace,
-							DynamicRelationshipType.withName("KNOW_PLACE"));
-					
+
 					tx.success();
 				} finally {
 					tx.finish();
@@ -64,8 +85,6 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 		}
 
 	}
-	
-
 
 	@Override
 	public void addAgentNodeList(List<Agent> agentList) throws AppException {
