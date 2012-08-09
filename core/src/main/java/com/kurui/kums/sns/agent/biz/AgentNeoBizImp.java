@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.agent.dao.AgentDAO;
+import com.kurui.kums.base.PerformListener;
 import com.kurui.kums.base.exception.AppException;
 import com.kurui.kums.sns.agent.AgentNode;
 import com.kurui.kums.sns.agent.dao.AgentNeoDAO;
@@ -17,15 +18,23 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 	@Override
 	public void buildAgentNetwork() {
 		
+		System.out.println("=================delete nodes ==========");
+		long a = System.currentTimeMillis();
+//		deleteAllAgentNode();
+		new PerformListener("===NeoDAO===deleteAllNode====", a);
+
+		
 		System.out.println("=============create Agent Neo =================");
 		try {
 			List<Agent> agentList=agentDAO.getAgentList();
 			
 			for (int i = 0; i <agentList.size(); i++) {
 				System.out.println("=============="+i+"===================");
-				if(i<10){
+				if(i<30){
 					Agent agent=agentList.get(i);
+					long b= System.currentTimeMillis();
 					addAgentNode(agent);
+					new PerformListener("===NeoDAO===addAgentNode====", b);
 				}else{
 					break;
 				}				
@@ -40,6 +49,10 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 	public void addAgentNode(Agent agent) throws AppException {
 		agentNeoDAO.addAgentNode(agent);
 
+	}
+	
+	public void deleteAllAgentNode(){
+		agentNeoDAO.deleteAllAgentNode();
 	}
 
 	@Override

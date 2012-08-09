@@ -21,6 +21,8 @@ public interface AgentNeoDAO {
 	
 	public void deleteAgentNodeRelation(AgentNode startNode,AgentNode endNode) throws AppException;
 	
+	public void deleteAllAgentNode();
+	
 	public void queryAgentNodeList(AgentNode agentNode) throws AppException;
 	
 
