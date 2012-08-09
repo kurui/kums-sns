@@ -53,6 +53,7 @@ public class EmbeddedNeo4j {
 				System.out.println("==============find friend:"+friend.getProperty("name"));
 			}
 
+			
 			String greeting = node1.getProperty(NAME_KEY) + " "
 					+ node2.getProperty(NAME_KEY);
 			System.out.println(greeting);
@@ -70,10 +71,10 @@ public class EmbeddedNeo4j {
 					.getProperty(NAME_KEY));
 			System.out.println(relationship.getProperty("type"));
 
-			relationship.delete();
-			
-			node1.delete();
-			node2.delete();
+//			relationship.delete();
+//			
+//			node1.delete();
+//			node2.delete();
 			tx.success();
 		} finally {
 			tx.finish();

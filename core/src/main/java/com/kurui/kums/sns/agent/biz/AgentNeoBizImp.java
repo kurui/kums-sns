@@ -22,11 +22,13 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 			List<Agent> agentList=agentDAO.getAgentList();
 			
 			for (int i = 0; i <agentList.size(); i++) {
+				System.out.println("=============="+i+"===================");
 				if(i<10){
 					Agent agent=agentList.get(i);
 					addAgentNode(agent);
-				}
-				
+				}else{
+					break;
+				}				
 			}
 		} catch (AppException e) {
 			e.printStackTrace();
