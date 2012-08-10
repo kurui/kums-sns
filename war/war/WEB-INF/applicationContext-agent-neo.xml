@@ -8,19 +8,6 @@
 	<bean id="graphDbService" class="org.neo4j.kernel.EmbeddedGraphDatabase"
 		destroy-method="shutdown">
 		<constructor-arg index="0" value="Neo4j-DB\\kums-sns" />
-		<!-- 
-		<constructor-arg index="1">
-            <map>
-                <entry key="create" value="false"/>
-                <entry key="neostore.nodestore.db.mapped_memory" value="20M"/>
-                <entry key="neostore.propertystore.db.mapped_memory" value="90M"/>
-                <entry key="neostore.nodestore.db.mapped_memory" value="1M"/>
-                <entry key="neostore.nodestore.db.mapped_memory" value="1M"/>
-                <entry key="neostore.nodestore.db.mapped_memory" value="130M"/>
-                <entry key="neostore.nodestore.db.mapped_memory" value="100M"/>
-            </map>
-        </constructor-arg>
-		 -->
 	</bean>
 
 	<bean id="baseNeoDBService" class="com.kurui.kums.commons.neo4j.BaseNeoDBServiceImp" />
@@ -58,8 +45,8 @@
 	</bean>
 	
 	<!-- Transactions -->
-	<tx:annotation-driven />
-	<bean id="transactionManager"
+	<!-- <tx:annotation-driven /> 
+	<bean id="neoTransactionManager"
 		class="org.springframework.transaction.jta.JtaTransactionManager">
 		<property name="transactionManager" ref="neo4jTransactionManagerService" />
 		<property name="userTransaction" ref="neo4jUserTransactionService" />
@@ -68,6 +55,6 @@
 	<bean id="neo4jUserTransactionService" class="org.neo4j.kernel.impl.transaction.UserTransactionImpl">
 		<constructor-arg index="0" ref="graphDbService" />
 	</bean>
-
+-->
 
 </beans>

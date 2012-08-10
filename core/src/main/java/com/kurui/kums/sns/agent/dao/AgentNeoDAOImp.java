@@ -34,18 +34,30 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 	
 	@Autowired
 	public void setAgentNeoDAOImp(GraphDatabaseService graphDbService) {
-		this.graphDbService = graphDbService;
+		this.graphDbService=graphDbService;
+		//为什么没有起作用呢
 		this.agentIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_AGENT);
-		this.knowPlaceIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_KNOW_PLACE);
+		this.knowPlaceIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_KNOW_PLACE);	
 		
+	}
+	
+	public void setIndexManage(){
+		agentIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_AGENT);
+		knowPlaceIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_KNOW_PLACE);	
 	}
 
 	@Override
 	public void addAgentNode(Agent agent) throws AppException {
+		/**
+		 * 这个如何注入
+		 * */
+		setIndexManage();
+		
 		if (agent != null) {
+			Transaction transaction=graphDbService.beginTx();
 			try {
 				
-
+				
 				Node agentNode = agentIndex.get("agentId",  agent.getId())
 						.getSingle();
 				if(agentNode==null){
@@ -57,21 +69,17 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 				agentNode.setProperty("reside",StringUtil.rTrim(agent.getReside()));
 				
 				agentIndex.add(agentNode, "agentId", agent.getId());
-				agentIndex.add(agentNode, "name", agent.getName());
-				
+				agentIndex.add(agentNode, "name", agent.getName());				
 				
 				Node root = graphDbService.getNodeById(0);
 				if (root != null) {
 					root.createRelationshipTo(agentNode,BaseRelationTypes.AGENT_ROOT);
 				}
 				
-				String know_place = null;
 				if (StringUtil.isEmpty(agent.getKnowPlace()) == false) {
-					know_place = StringUtil.rTrim(agent.getKnowPlace());
+					String know_place = StringUtil.rTrim(agent.getKnowPlace());
 					agentNode.setProperty("know_place", know_place);
-				}			
-
-				if (know_place != null) {
+				
 					Node knowPlaceNode = knowPlaceIndex.get("name", know_place)
 							.getSingle();
 
@@ -86,8 +94,10 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 							knowPlaceNode,
 							DynamicRelationshipType.withName("KNOW_PLACE"));
 				}
-			}finally{
 				
+				transaction.success();
+			}finally{
+				transaction.finish();
 			}
 		}
 		
