@@ -12,8 +12,6 @@ import com.kurui.kums.sns.agent.dao.AgentNeoDAO;
 public class AgentNeoBizImp implements AgentNeoBiz {
 	private AgentDAO agentDAO;
 	private AgentNeoDAO agentNeoDAO;
-
-
 	
 	@Override
 	public void buildAgentNetwork() {
@@ -32,9 +30,8 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 				System.out.println("=============="+i+"===================");
 				if(i<30){
 					Agent agent=agentList.get(i);
-					long b= System.currentTimeMillis();
-					addAgentNode(agent);
-					new PerformListener("===NeoDAO===addAgentNode====", b);
+				
+					addAgentNode(agent);					
 				}else{
 					break;
 				}				
@@ -42,6 +39,8 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 		} catch (AppException e) {
 			e.printStackTrace();
 		}
+		long b= System.currentTimeMillis();
+		new PerformListener("===NeoDAO===addAgentNode====", b);
 		System.out.println("=============finish create Agent Neo =================");
 	}
 

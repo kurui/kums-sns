@@ -18,9 +18,14 @@
  */
 package com.kurui.kums.commons.neo4j;
 
-import org.neo4j.graphdb.RelationshipType;
 
-public enum BaseRelTypes implements RelationshipType
-{
-    PART_OF_NAME, PART_OF_TITLE
+public class BaseNeoParam{
+	
+	
+	public static String INDEX_AGENT="INDEX_AGENT";
+	
+	public static String INDEX_KNOW_PLACE="INDEX_KNOW_PLACE";
+	
+
+	
 }

@@ -13,7 +13,7 @@ import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.index.IndexHits;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BaseNeoDBServiceImp {
+public class BaseNeoDBServiceImp implements BaseNeoDBService {
 	
 	private GraphDatabaseService graphDbService;
 
@@ -30,7 +30,7 @@ public class BaseNeoDBServiceImp {
 		this.graphDbService = graphDbService;
 		this.nodeIndex = graphDbService.index().forNodes(SEARCH_INDEX_NAME);
 	}
-	private Node getSingleNode(String key, String value) {
+	public Node getSingleNode(String key, String value) {
 		IndexHits<Node> hits = nodeIndex.get(key, value);
 		for (Node node : hits) {
 			return node;
@@ -38,8 +38,8 @@ public class BaseNeoDBServiceImp {
 		return null;
 	}
 
-	private Node searchSingle(final String value, final String indexName,
-			final BaseRelTypes wordRelType) {
+	public Node searchSingle(final String value, final String indexName,
+			final BaseRelationTypes wordRelType) {
 		// get the words in the search
 		final List<Node> wordList = findSearchWords(value, indexName);
 		if (wordList.isEmpty()) {
@@ -74,7 +74,7 @@ public class BaseNeoDBServiceImp {
 		return match;
 	}
 
-	private List<Node> findSearchWords(final String userInput,
+	public List<Node> findSearchWords(final String userInput,
 			final String partIndexName) {
 		final List<Node> wordList = new ArrayList<Node>();
 		// prepare search terms
@@ -101,7 +101,7 @@ public class BaseNeoDBServiceImp {
 		return wordList;
 	}
 
-	private String[] splitSearchString(final String value) {
+	public String[] splitSearchString(final String value) {
 		return value.toLowerCase(Locale.ENGLISH).split("[^\\w]+");
 	}
 }
