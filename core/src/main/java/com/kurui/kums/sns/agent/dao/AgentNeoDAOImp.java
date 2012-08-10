@@ -24,6 +24,8 @@ import com.kurui.kums.sns.agent.AgentNode;
 
 public class AgentNeoDAOImp implements AgentNeoDAO {
 
+
+
 	@Override
 	public void addAgentNode(Agent agent) throws AppException {
 		if (agent != null) {
@@ -33,14 +35,14 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 			String storeDir = "F:\\project\\Neo4j-DB\\kums-sns";
 			GraphDatabaseService neoService = new EmbeddedGraphDatabase(
 					storeDir);
-		
+
 			new PerformListener("===NeoDAO===open connection====", a);
 
 			if (neoService != null) {
 				long b = System.currentTimeMillis();
 				Transaction tx = neoService.beginTx();
 				try {
-				
+
 					Node root = neoService.getNodeById(0);
 
 					Node newNode = neoService.createNode();
@@ -50,16 +52,16 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 					newNode.setProperty("sex", agent.getSex());
 					newNode.setProperty("reside",
 							StringUtil.rTrim(agent.getReside()));
-					String know_place=null;
-					if(StringUtil.isEmpty(agent.getKnowPlace())==false){
-						know_place=StringUtil.rTrim(agent.getKnowPlace());
-						newNode.setProperty("know_place",know_place);
+					String know_place = null;
+					if (StringUtil.isEmpty(agent.getKnowPlace()) == false) {
+						know_place = StringUtil.rTrim(agent.getKnowPlace());
+						newNode.setProperty("know_place", know_place);
 					}
-					
-					
-					new PerformListener("===NeoDAO===begin tx create node====", b);
-				
-					if(root!=null){
+
+					new PerformListener("===NeoDAO===begin tx create node====",
+							b);
+
+					if (root != null) {
 						root.createRelationshipTo(newNode,
 								DynamicRelationshipType.withName("Root"));
 					}
@@ -67,74 +69,77 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 					long c = System.currentTimeMillis();
 
 					// 索引 查询
-					IndexManager indexManager=neoService.index();
-					Index<Node> nodeIndex=indexManager.forNodes("agent");
+					IndexManager indexManager = neoService.index();
+					Index<Node> nodeIndex = indexManager.forNodes("agent");
 					nodeIndex.add(newNode, "agentId", agent.getId());
-					new PerformListener("===NeoDAO===open index manager====", c);	
-					
-					
-					if(know_place!=null){
+					new PerformListener("===NeoDAO===open index manager====", c);
+
+					if (know_place != null) {
 						long d = System.currentTimeMillis();
-						Index<Node> knowPlaceIndex=indexManager.forNodes("know_place_index");
-						Node knowPlaceNode=knowPlaceIndex.get("name", know_place).getSingle();
-						
-						if(knowPlaceNode==null){
+						Index<Node> knowPlaceIndex = indexManager
+								.forNodes("know_place_index");
+						Node knowPlaceNode = knowPlaceIndex.get("name",
+								know_place).getSingle();
+
+						if (knowPlaceNode == null) {
 							knowPlaceNode = neoService.createNode();
 							knowPlaceNode.setProperty("name",
 									StringUtil.rTrim(agent.getKnowPlace()));
-							knowPlaceIndex.add(knowPlaceNode, "name",know_place);
+							knowPlaceIndex.add(knowPlaceNode, "name",
+									know_place);
 						}
-						
 
-						Relationship rsKnowPlace = newNode.createRelationshipTo(
-								knowPlaceNode,
-								DynamicRelationshipType.withName("KNOW_PLACE"));
-						new PerformListener("===NeoDAO===query and create know_place====", d);	
+						Relationship rsKnowPlace = newNode
+								.createRelationshipTo(knowPlaceNode,
+										DynamicRelationshipType
+												.withName("KNOW_PLACE"));
+						new PerformListener(
+								"===NeoDAO===query and create know_place====",
+								d);
 					}
-					
+
 					tx.success();
 				} finally {
 					tx.finish();
 				}
 				long f = System.currentTimeMillis();
 				neoService.shutdown();
-				new PerformListener("===NeoDAO=== shutdown====", f);	
+				new PerformListener("===NeoDAO=== shutdown====", f);
 			}
 
 		}
 
 	}
-	
-	public void deleteAllAgentNode(){
+
+	public void deleteAllAgentNode() {
 		String storeDir = "F:\\project\\Neo4j-DB\\kums-sns";
-		GraphDatabaseService neoService = new EmbeddedGraphDatabase(
-				storeDir);
+		GraphDatabaseService neoService = new EmbeddedGraphDatabase(storeDir);
 		if (neoService != null) {
 			Transaction tx = neoService.beginTx();
-			try {	
-				IndexManager indexManager=neoService.index();
-				Index<Node> nodeIndex=indexManager.forNodes("agent");
-				
-				
-				
+			try {
+				IndexManager indexManager = neoService.index();
+				Index<Node> nodeIndex = indexManager.forNodes("agent");
+
 				Node root = neoService.getNodeById(0);
-				org.neo4j.graphdb.Traverser friends = root.traverse(Order.BREADTH_FIRST,
-						StopEvaluator.DEPTH_ONE/*查询深度*/,
-						ReturnableEvaluator.ALL_BUT_START_NODE, DynamicRelationshipType.withName("Root"),
+				org.neo4j.graphdb.Traverser friends = root.traverse(
+						Order.BREADTH_FIRST, StopEvaluator.DEPTH_ONE/* 查询深度 */,
+						ReturnableEvaluator.ALL_BUT_START_NODE,
+						DynamicRelationshipType.withName("Root"),
 						Direction.BOTH);
 				for (Node friend : friends) {
-					System.out.println("==============find friend:"+friend.getProperty("name"));
+					System.out.println("==============find friend:"
+							+ friend.getProperty("name"));
 					friend.getRelationships().iterator().next().delete();
 					friend.delete();
 				}
 
-			tx.success();
-		} finally {
-			tx.finish();
-		}
+				tx.success();
+			} finally {
+				tx.finish();
+			}
 
-		neoService.shutdown();
-	}
+			neoService.shutdown();
+		}
 	}
 
 	@Override
