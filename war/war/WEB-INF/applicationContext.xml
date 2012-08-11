@@ -179,14 +179,15 @@
 			</list>
 		</property>
 	</bean>
-	
-	<import resource="applicationContext-base.xml" />	
+
+	<import resource="applicationContext-base.xml" />
 	<import resource="applicationContext-right.xml" />
 	<import resource="applicationContext-system.xml" />
 	<import resource="applicationContext-agent.xml" />
-	<import resource="applicationContext-agent-neo.xml" />
-	
 	<import resource="applicationContext-transaction.xml" />
 	<import resource="applicationContext-finance.xml" />
 	<import resource="applicationContext-market.xml" />
+
+	<import resource="applicationContext-neo4j.xml" />
+	<import resource="applicationContext-neo4j-agent.xml" />
 </beans>

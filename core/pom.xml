@@ -14,7 +14,7 @@
 		<!-- Log4J Settings -->
 		<log4j.version>1.2.14</log4j.version>
 	</properties>
-
+<!--  
 	<repositories>
 		<repository>
 			<id>neo4j-public-repository</id>
@@ -25,7 +25,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
+-->
 
 	<build>
 		<plugins>
@@ -79,6 +79,12 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>gnujaxp</groupId>
+			<artifactId>gnujaxp</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>log4j</groupId>
