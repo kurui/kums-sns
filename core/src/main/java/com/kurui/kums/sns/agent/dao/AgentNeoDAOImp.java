@@ -12,8 +12,6 @@ import org.neo4j.graphdb.StopEvaluator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Traverser.Order;
 import org.neo4j.graphdb.index.Index;
-import org.neo4j.graphdb.index.IndexManager;
-import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kurui.kums.agent.Agent;
@@ -104,15 +102,14 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 	}
 
 	public void deleteAllAgentNode() {
-		String storeDir = "F:\\project\\Neo4j-DB\\kums-sns";
-		GraphDatabaseService neoService = new EmbeddedGraphDatabase(storeDir);
-		if (neoService != null) {
-			Transaction tx = neoService.beginTx();
+		
+		if (graphDbService != null) {
+			setIndexManage();
+			
+			Transaction tx = graphDbService.beginTx();
 			try {
-				IndexManager indexManager = neoService.index();
-				Index<Node> nodeIndex = indexManager.forNodes("agent");
 
-				Node root = neoService.getNodeById(0);
+				Node root = graphDbService.getNodeById(0);
 				org.neo4j.graphdb.Traverser friends = root.traverse(
 						Order.BREADTH_FIRST, StopEvaluator.DEPTH_ONE/* 查询深度 */,
 						ReturnableEvaluator.ALL_BUT_START_NODE,
@@ -130,7 +127,6 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 				tx.finish();
 			}
 
-			neoService.shutdown();
 		}
 	}
 

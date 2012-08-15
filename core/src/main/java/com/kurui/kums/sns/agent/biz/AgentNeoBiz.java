@@ -24,6 +24,8 @@ public interface AgentNeoBiz {
 	public void deleteAgentNodeRelation(AgentNode startNode,AgentNode endNode) throws AppException;
 	
 	public void queryAgentNodeList(AgentNode agentNode) throws AppException;
+
+	public void deleteAllAgentNode();
 	
 
 }
