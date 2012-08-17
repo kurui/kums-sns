@@ -13,6 +13,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Traverser.Order;
 import org.neo4j.graphdb.index.Index;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.base.exception.AppException;
@@ -34,8 +35,8 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 	public void setAgentNeoDAOImp(GraphDatabaseService graphDbService) {
 		this.graphDbService=graphDbService;
 		//为什么没有起作用呢
-		this.agentIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_AGENT);
-		this.knowPlaceIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_KNOW_PLACE);	
+//		this.agentIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_AGENT);
+//		this.knowPlaceIndex = graphDbService.index().forNodes(BaseNeoParam.INDEX_KNOW_PLACE);	
 		
 	}
 	

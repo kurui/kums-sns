@@ -24,17 +24,17 @@ public class AgentNeoBizImp implements AgentNeoBiz {
 		
 		System.out.println("=============create Agent Neo =================");
 		try {
-			List<Agent> agentList=agentDAO.getAgentList();
+			List<Agent> agentList=agentDAO.getValidAgentList();
 			
 			for (int i = 0; i <agentList.size(); i++) {
 				System.out.println("=============="+i+"===================");
-				if(i<30){
+//				if(i<30){
 					Agent agent=agentList.get(i);
 				
 					addAgentNode(agent);					
-				}else{
-					break;
-				}				
+//				}else{
+//					break;
+//				}				
 			}
 		} catch (AppException e) {
 			e.printStackTrace();
