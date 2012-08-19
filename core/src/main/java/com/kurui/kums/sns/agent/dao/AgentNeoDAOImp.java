@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.base.exception.AppException;
 import com.kurui.kums.base.util.StringUtil;
-import com.kurui.kums.commons.neo4j.BaseNeoDBService;
-import com.kurui.kums.commons.neo4j.BaseNeoParam;
-import com.kurui.kums.commons.neo4j.BaseRelationTypes;
 import com.kurui.kums.sns.agent.AgentNode;
+import com.kurui.kums.sns.commons.neo4j.BaseNeoDBService;
+import com.kurui.kums.sns.commons.neo4j.BaseNeoParam;
+import com.kurui.kums.sns.commons.neo4j.BaseRelationTypes;
 
 public class AgentNeoDAOImp implements AgentNeoDAO {
 	private BaseNeoDBService baseNeoDBService;
@@ -87,11 +87,13 @@ public class AgentNeoDAOImp implements AgentNeoDAO {
 						knowPlaceNode.setProperty("name",
 								StringUtil.rTrim(agent.getKnowPlace()));
 						knowPlaceIndex.add(knowPlaceNode, "name", know_place);
+						
+						Relationship rsKnowPlace = agentNode.createRelationshipTo(
+								knowPlaceNode,
+								DynamicRelationshipType.withName("KNOW_PLACE"));
 					}
 
-					Relationship rsKnowPlace = agentNode.createRelationshipTo(
-							knowPlaceNode,
-							DynamicRelationshipType.withName("KNOW_PLACE"));
+					
 				}
 				
 				transaction.success();

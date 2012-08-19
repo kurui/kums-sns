@@ -14,18 +14,9 @@
 		<!-- Log4J Settings -->
 		<log4j.version>1.2.14</log4j.version>
 	</properties>
-<!--  
-	<repositories>
-		<repository>
-			<id>neo4j-public-repository</id>
-			<name>Publically available Maven 2 repository for Neo4j</name>
-			<url>http://m2.neo4j.org</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
--->
+	<!-- <repositories> <repository> <id>neo4j-public-repository</id> <name>Publically 
+		available Maven 2 repository for Neo4j</name> <url>http://m2.neo4j.org</url> 
+		<snapshots> <enabled>true</enabled> </snapshots> </repository> </repositories> -->
 
 	<build>
 		<plugins>
@@ -56,7 +47,27 @@
 			<type>pom</type>
 		</dependency>
 
+		<!-- JPA -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+
+
+
 		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-neo4j</artifactId>
+			<version>2.0.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>2.5.5</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -78,16 +89,12 @@
 			<version>2.5.5</version>
 		</dependency>
 
-<!-- 
-		<dependency>
-			<groupId>gnujaxp</groupId>
-			<artifactId>gnujaxp</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
- -->
- 
-		
+
+
+		<!-- <dependency> <groupId>gnujaxp</groupId> <artifactId>gnujaxp</artifactId> 
+			<version>1.0.0</version> <scope>provided</scope> </dependency> -->
+
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
