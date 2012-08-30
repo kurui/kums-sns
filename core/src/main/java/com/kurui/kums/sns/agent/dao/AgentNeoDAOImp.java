@@ -13,19 +13,17 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Traverser.Order;
 import org.neo4j.graphdb.index.Index;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.kurui.kums.agent.Agent;
 import com.kurui.kums.base.exception.AppException;
 import com.kurui.kums.base.util.StringUtil;
 import com.kurui.kums.sns.agent.AgentNode;
-import com.kurui.kums.sns.commons.neo4j.BaseNeoDBService;
 import com.kurui.kums.sns.commons.neo4j.BaseNeoParam;
 import com.kurui.kums.sns.commons.neo4j.BaseRelationTypes;
 
 public class AgentNeoDAOImp implements AgentNeoDAO {
-	private BaseNeoDBService baseNeoDBService;
 	private GraphDatabaseService graphDbService;
+	
 	
 	private Index<Node> agentIndex;
 	private Index<Node> knowPlaceIndex;

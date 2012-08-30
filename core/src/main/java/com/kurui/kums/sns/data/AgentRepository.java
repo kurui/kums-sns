@@ -22,7 +22,7 @@ public class AgentRepository {
         if (id == null) return null;
         final AgentNode agent = entityManager.find(AgentNode.class, id);
         if (agent != null) {
-        	agent.persist();
+//        	agent.persist();
         }
         return agent;
     }
@@ -37,7 +37,7 @@ public class AgentRepository {
 		{
             final AgentNode agent = (AgentNode) resultList.get(0);
             if (agent != null) {
-            	agent.persist();
+//            	agent.persist();
             }
             return agent;
 		} 
@@ -66,12 +66,12 @@ public class AgentRepository {
     public void persist(AgentNode agent) {
         this.entityManager.persist(agent);
         this.entityManager.flush();
-        agent.persist();
+//        agent.persist();
     }
 
 	@Transactional
     public AgentNode merge(AgentNode agent) {
-        agent.persist();
+//        agent.persist();
         AgentNode merged = this.entityManager.merge(agent);
         this.entityManager.flush();
         return merged;

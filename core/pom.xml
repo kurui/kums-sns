@@ -14,10 +14,16 @@
 		<!-- Log4J Settings -->
 		<log4j.version>1.2.14</log4j.version>
 	</properties>
-	<!-- <repositories> <repository> <id>neo4j-public-repository</id> <name>Publically 
-		available Maven 2 repository for Neo4j</name> <url>http://m2.neo4j.org</url> 
-		<snapshots> <enabled>true</enabled> </snapshots> </repository> </repositories> -->
+	<repositories><!-- <repository> <id>neo4j-public-repository</id> <name>Publically 
+			available Maven 2 repository for Neo4j</name> <url>http://m2.neo4j.org</url> 
+			<snapshots> <enabled>true</enabled> </snapshots> </repository> 
 
+		<repository>
+			<id>spring-milestone</id>
+			<name>Spring Maven MILESTONE Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+		</repository>-->
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -34,11 +40,7 @@
 		</plugins>
 	</build>
 
-
-
-
 	<dependencies>
-
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j</artifactId>
@@ -62,6 +64,13 @@
 			<artifactId>spring-data-neo4j</artifactId>
 			<version>2.0.0.RELEASE</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-neo4j-rest</artifactId>
+			<version>2.0.0.RELEASE</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
@@ -71,28 +80,51 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>2.5.5</version>
+			<version>3.0.5.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>2.5.5</version>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>3.2.0.M1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>2.5.5</version>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-struts</artifactId>
+			<version>3.1.0.M1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.0.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>2.5.5</version>
+			<version>3.1.0.M1</version>
 		</dependency>
 
-
-
-		<!-- <dependency> <groupId>gnujaxp</groupId> <artifactId>gnujaxp</artifactId> 
-			<version>1.0.0</version> <scope>provided</scope> </dependency> -->
+		<!-- -->
+		<dependency>
+			<groupId>gnujaxp</groupId>
+			<artifactId>gnujaxp</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 
 		<dependency>
@@ -100,6 +132,13 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.testng</groupId>

@@ -6,6 +6,6 @@ import com.kurui.kums.agent.Agent;
 
 
 @NodeEntity(partial = true)
-public class AgentNode extends Agent {
+public class AgentNode  {
 
 }

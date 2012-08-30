@@ -21,7 +21,7 @@ public class AreaRepository {
 		if (id == null) return null;
 		final AreaNode area = entityManager.find(AreaNode.class, id);
 		if (area != null) {
-			area.persist();
+//			area.persist();
 			
 		}
 		return area;

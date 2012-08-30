@@ -8,12 +8,26 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 
+	
 
+	<bean id="graphDbService" 
+		class="org.springframework.data.neo4j.rest.SpringRestGraphDatabase">
+	  <constructor-arg index="0" value="http://localhost:7474/db/data" />
+	</bean>
+	<!-- 
+	<neo4j:config graphDatabaseService="graphDatabaseService"/>
+	<bean id="executionEngine" class="org.neo4j.cypher.javacompat.ExecutionEngine">
+  		<constructor-arg index="0" ref="graphDatabaseService" />
+	</bean>
+ -->
+ 
 	<!-- Beans -->
+	<!-- 	
 	<bean id="graphDbService" class="org.neo4j.kernel.EmbeddedGraphDatabase"
 		destroy-method="shutdown">
 		<constructor-arg index="0" value="F:\\project\\Neo4j-DB\\kums-sns" />
 	</bean>
+ -->
 
 	<!-- Transactions -->
 	<tx:annotation-driven />

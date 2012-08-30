@@ -10,8 +10,10 @@ import org.neo4j.graphdb.index.IndexHits;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class TestNeo4j extends TestCase {
+	
+	public static void t1() {
 
-	public static void testOperator1() {
+//	public static void testOperator1() {
 		// 载入数据库
 		GraphDatabaseService neo = new EmbeddedGraphDatabase(
 				"D:\\ServerRoot\\neo4j-enterprise-1.8.M06\\data\\graph.db");
